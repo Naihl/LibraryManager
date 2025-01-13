@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using BusinessObjects.Entity;
 using DataAccessLayer.Repository;
+using Services.Services;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
         // Utilisation de BookRepository
-        BookRepository bookRepository = new BookRepository();
-        IEnumerable<Book> library = bookRepository.GetAll();
+        CatalogManager catalogManager = new CatalogManager(new BookRepository());
 
-        IEnumerable<Book> aventureBooks = from book in library
-                                          where book.Type == Book.TypeBook.Aventure
-                                          select book;
+        IEnumerable<Book> aventureBooks = catalogManager.GetCatalog(Book.TypeBook.Aventure);
 
         foreach (Book book in aventureBooks)
         {
