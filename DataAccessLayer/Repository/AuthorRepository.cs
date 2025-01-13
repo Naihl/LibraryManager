@@ -3,7 +3,7 @@ using BusinessObjects.Entity;
 
 namespace DataAccessLayer.Repository
 {
-    public class AuthorRepository
+    public class AuthorRepository : IGenericRepository<Author>
     {
         private readonly List<Author> _authors;
 
@@ -23,12 +23,8 @@ namespace DataAccessLayer.Repository
             return _authors;
         }
 
-        public Author? Get(int id)
+        public Author Get(int id)
         {
-            if (id < 0 || id >= _authors.Count)
-            {
-                return null;
-            }
             return _authors[id];
         }
     }

@@ -1,15 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using BusinessObjects.Entity;
-using DataAccessLayer.Repository;
+﻿using DataAccessLayer.Repository;
 
 namespace Services.Services
 {
     public class CatalogManager
     {
-        private readonly BookRepository _bookRepository;
+        private readonly IGenericRepository<Book> _bookRepository;
 
-        public CatalogManager(BookRepository bookRepository)
+        public CatalogManager(IGenericRepository<Book> bookRepository)
         {
             _bookRepository = bookRepository;
         }
@@ -24,7 +21,7 @@ namespace Services.Services
             return _bookRepository.GetAll().Where(book => book.Type == type);
         }
 
-        public Book? FindBook(int id)
+        public Book FindBook(int id)
         {
             return _bookRepository.Get(id);
         }

@@ -3,7 +3,7 @@ using BusinessObjects.Entity;
 
 namespace DataAccessLayer.Repository
 {
-    public class LibraryRepository
+    public class LibraryRepository : IGenericRepository<Library>
     {
         private readonly List<Library> _library;
 

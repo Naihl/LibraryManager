@@ -8,7 +8,7 @@ using BusinessObjects;
 
 namespace DataAccessLayer.Repository
 {
-    public class BookRepository
+    public class BookRepository : IGenericRepository<Book>
     {
         private readonly List<Book> _books;
 
@@ -27,12 +27,8 @@ namespace DataAccessLayer.Repository
             return _books;
         }
 
-        public Book? Get(int id)
+        public Book Get(int id)
         {
-            if (id < 0 || id >= _books.Count)
-            {
-                return null;
-            }
             return _books[id];
         }
 
