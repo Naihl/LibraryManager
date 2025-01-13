@@ -1,31 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BusinessObjects.Entity;
+using DataAccessLayer.Repository;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
-        // Console.WriteLine("Hello, World!");
+        // Utilisation de BookRepository
+        BookRepository bookRepository = new BookRepository();
+        IEnumerable<Book> library = bookRepository.GetAll();
 
-        Book[] library =
-        [
-            new Book("Pérismer", "Fiction"),
-            new Book("Le Seigneur des anneaux", "Aventure"),
-            new Book("Star Wars", "SF"),
-        ];
-
-        IEnumerable<Book> aventureBooks = from Book in library
-                                          where Book.Type == "Aventure"
-                                          select Book;
-
-
+        IEnumerable<Book> aventureBooks = from book in library
+                                          where book.Type == Book.TypeBook.Aventure
+                                          select book;
 
         foreach (Book book in aventureBooks)
         {
             Console.WriteLine(book.Name);
-            // Console.WriteLine(book.Type);
         }
 
+        // Utilisation de AuthorRepository
+        AuthorRepository authorRepository = new AuthorRepository();
+        IEnumerable<Author> authors = authorRepository.GetAll();
+
+        foreach (Author author in authors)
+        {
+            Console.WriteLine(author.LastName);
+        }
+
+        // Exemple d'utilisation de Get(int id) pour Author
+        Author? authorById = authorRepository.Get(1);
+        if (authorById != null)
+        {
+            Console.WriteLine($"Author with ID 1: {authorById.LastName}");
+        }
     }
 }
