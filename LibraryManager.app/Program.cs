@@ -8,7 +8,7 @@ internal class Program
         Book[] Library =
         [
             new Book("Pérismer", "Fiction"),
-            new Book("Le saigneur des angneaux", "Aventure"),
+            new Book("Le Seigneur des anneaux", "Aventure"),
             new Book("Star Wars", "SF"),
         ];
 
