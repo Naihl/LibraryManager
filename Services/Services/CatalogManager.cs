@@ -2,7 +2,7 @@
 
 namespace Services.Services
 {
-    public class CatalogManager
+    public class CatalogManager : ICatalogManager<Book>
     {
         private readonly IGenericRepository<Book> _bookRepository;
 
@@ -16,12 +16,12 @@ namespace Services.Services
             return _bookRepository.GetAll();
         }
 
-        public IEnumerable<Book> GetCatalog(Book.TypeBook type)
+        public IEnumerable<Book> GetCatalog(TypeBook type)
         {
             return _bookRepository.GetAll().Where(book => book.Type == type);
         }
 
-        public Book FindBook(int id)
+        public Book Find(int id)
         {
             return _bookRepository.Get(id);
         }

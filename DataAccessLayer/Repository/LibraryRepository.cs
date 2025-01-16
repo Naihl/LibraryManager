@@ -21,12 +21,8 @@ namespace DataAccessLayer.Repository
             return _library;
         }
 
-        public Library? Get(int id)
+        public Library Get(int id)
         {
-            if (id < 0 || id >= _library.Count)
-            {
-                return null;
-            }
             return _library[id];
         }
     }

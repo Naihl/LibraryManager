@@ -14,11 +14,25 @@ namespace DataAccessLayer.Repository
 
         public BookRepository()
         {
+
+            Book Perismer = new Book();
+            Perismer.Name = "Pérismer";
+            Perismer.Type = TypeBook.Fiction;
+
+            Book LeSeigneurDesAnneaux = new Book();
+            LeSeigneurDesAnneaux.Name = "Le Seigneur des anneaux";
+            LeSeigneurDesAnneaux.Type = TypeBook.Aventure;
+
+            Book StarWars = new Book();
+            StarWars.Name = "Star Wars";
+            StarWars.Type = TypeBook.SF;
+
+
             _books = new List<Book>
             {
-                new Book("Pérismer", Book.TypeBook.Fiction),
-                new Book("Le Seigneur des anneaux", Book.TypeBook.Aventure),
-                new Book("Star Wars", Book.TypeBook.SF)
+                Perismer,
+                LeSeigneurDesAnneaux,
+                StarWars
             };
         }
 

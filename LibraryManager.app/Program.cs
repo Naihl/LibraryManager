@@ -17,7 +17,9 @@ internal class Program
                 // En gros: on remplace tous les "appels" à l'interface générique par la vraie interface
                 // à tous les endroits où elle est appelée
                 services.AddScoped<IGenericRepository<Book>, BookRepository>();
-                // services.AddScoped<IGenericRepository<Author>, AuthorRepository>();
+                services.AddScoped<IGenericRepository<Author>, AuthorRepository>();
+                services.AddScoped<IGenericRepository<Library>, LibraryRepository>();
+                services.AddScoped<ICatalogManager<Book>, CatalogManager>();
             })
             .Build();
     }
@@ -28,12 +30,13 @@ internal class Program
 
         // Utilisation de BookRepository avec IHost
         IHost host = CreateHostBuilder();
-        CatalogManager catalogManager = new CatalogManager(host.Services.GetRequiredService<IGenericRepository<Book>>());
+        // CatalogManager catalogManager = new CatalogManager(host.Services.GetRequiredService<IGenericRepository<Book>>());
+        ICatalogManager<Book> catalogManager = host.Services.GetRequiredService<ICatalogManager<Book>>();
         // au lieu de
         // CatalogManager catalogManager = new CatalogManager(new BookRepository());
 
 
-        IEnumerable<Book> aventureBooks = catalogManager.GetCatalog(Book.TypeBook.Aventure);
+        IEnumerable<Book> aventureBooks = catalogManager.GetCatalog(TypeBook.Aventure);
 
         foreach (Book book in aventureBooks)
         {
@@ -41,7 +44,7 @@ internal class Program
         }
 
         // Utilisation de AuthorRepository
-        AuthorRepository authorRepository = new AuthorRepository();
+        IGenericRepository<Author> authorRepository = host.Services.GetRequiredService<IGenericRepository<Author>>();
         IEnumerable<Author> authors = authorRepository.GetAll();
 
         foreach (Author author in authors)

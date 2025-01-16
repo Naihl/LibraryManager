@@ -4,11 +4,11 @@ using BusinessObjects.Entity;
 
 namespace DataAccessLayer.Repository
 {
-    public interface IGenericRepository<T>
+    public interface IGenericRepository<IEntity>
     {
-        public IEnumerable<T> GetAll();
+        public IEnumerable<IEntity> GetAll();
 
-        public T Get(int id);
+        public IEntity Get(int id);
     }
 
 }
