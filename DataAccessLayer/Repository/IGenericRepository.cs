@@ -1,14 +1,20 @@
 
 using BusinessObjects.Entity;
+using Microsoft.EntityFrameworkCore;
+
 
 
 namespace DataAccessLayer.Repository
 {
-    public interface IGenericRepository<IEntity>
+    public interface IGenericRepository<T> where T : IEntity
     {
-        public IEnumerable<IEntity> GetAll();
+        public IEnumerable<T> GetAll();
 
-        public IEntity Get(int id);
+        public T Get(int id);
+
+        public T Add(T entity);
     }
+
+
 
 }

@@ -1,29 +1,29 @@
-﻿using System.Collections.Generic;
-using BusinessObjects.Entity;
+﻿//using System.Collections.Generic;
+//using BusinessObjects.Entity;
 
-namespace DataAccessLayer.Repository
-{
-    public class LibraryRepository : IGenericRepository<Library>
-    {
-        private readonly List<Library> _library;
+//namespace DataAccessLayer.Repository
+//{
+//    public class LibraryRepository : IGenericRepository<Library>
+//    {
+//        private readonly List<Library> _library;
 
-        public LibraryRepository()
-        {
-            _library = new List<Library>
-            {
-                new Library("Bibliothèque d'Opale Sud", "4 rue Francis Pacuhet 62600 Berck", new BookRepository().GetAll() )
+//        public LibraryRepository()
+//        {
+//            _library = new List<Library>
+//            {
+//                new Library("Bibliothèque d'Opale Sud", "4 rue Francis Pacuhet 62600 Berck", new BookRepository().GetAll() )
 
-            };
-        }
+//            };
+//        }
 
-        public IEnumerable<Library> GetAll()
-        {
-            return _library;
-        }
+//        public IEnumerable<Library> GetAll()
+//        {
+//            return _library;
+//        }
 
-        public Library Get(int id)
-        {
-            return _library[id];
-        }
-    }
-}
+//        public Library Get(int id)
+//        {
+//            return _library[id];
+//        }
+//    }
+//}

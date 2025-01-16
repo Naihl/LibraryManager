@@ -1,50 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BusinessObjects;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
+//using BusinessObjects;
+//using DataAccessLayer.Contexts;
 
 
-namespace DataAccessLayer.Repository
-{
-    public class BookRepository : IGenericRepository<Book>
-    {
-        private readonly List<Book> _books;
+//namespace DataAccessLayer.Repository
+//{
+//    public class BookRepository : IGenericRepository<Book>
+//    {
+//        private readonly LibraryContext _libraryContext;
 
-        public BookRepository()
-        {
+//        public BookRepository(LibraryContext context)
+//        {
 
-            Book Perismer = new Book();
-            Perismer.Name = "Pérismer";
-            Perismer.Type = TypeBook.Fiction;
+//            _libraryContext = context;
+//        }
 
-            Book LeSeigneurDesAnneaux = new Book();
-            LeSeigneurDesAnneaux.Name = "Le Seigneur des anneaux";
-            LeSeigneurDesAnneaux.Type = TypeBook.Aventure;
+//        public IEnumerable<Book> GetAll()
+//        {
+//            return _books;
+//        }
 
-            Book StarWars = new Book();
-            StarWars.Name = "Star Wars";
-            StarWars.Type = TypeBook.SF;
+//        public Book Get(int id)
+//        {
+//            return _books[id];
+//        }
 
-
-            _books = new List<Book>
-            {
-                Perismer,
-                LeSeigneurDesAnneaux,
-                StarWars
-            };
-        }
-
-        public IEnumerable<Book> GetAll()
-        {
-            return _books;
-        }
-
-        public Book Get(int id)
-        {
-            return _books[id];
-        }
-
-    }
-}
+//    }
+//}

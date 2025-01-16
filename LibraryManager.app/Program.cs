@@ -3,7 +3,9 @@ using DataAccessLayer.Repository;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Services.Services;
+using DataAccessLayer.Contexts;
 
 
 internal class Program
@@ -13,12 +15,15 @@ internal class Program
         return Host.CreateDefaultBuilder()
             .ConfigureServices(services =>
             {
+                var dbPath = Path.Combine(Directory.GetCurrentDirectory(), "library.db");
+                services.AddDbContext<LibraryContext>(options =>
+                options.UseSqlite($"Data Source={dbPath};"));
                 // Configuration des services
                 // En gros: on remplace tous les "appels" à l'interface générique par la vraie interface
                 // à tous les endroits où elle est appelée
-                services.AddScoped<IGenericRepository<Book>, BookRepository>();
-                services.AddScoped<IGenericRepository<Author>, AuthorRepository>();
-                services.AddScoped<IGenericRepository<Library>, LibraryRepository>();
+                services.AddScoped<IGenericRepository<Book>, GenericRepository<Book>>();
+                services.AddScoped<IGenericRepository<Author>, GenericRepository<Author>>();
+                services.AddScoped<IGenericRepository<Library>, GenericRepository<Library>>();
                 services.AddScoped<ICatalogManager<Book>, CatalogManager>();
             })
             .Build();
