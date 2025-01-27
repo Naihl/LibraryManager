@@ -9,5 +9,6 @@ namespace Services.Services
         IEnumerable<Book> GetCatalog();
         IEnumerable<Book> GetCatalog(TypeBook type);
         Book Find(int id);
+        void Add(Book book);
     }
 }

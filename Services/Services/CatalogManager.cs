@@ -25,5 +25,10 @@ namespace Services.Services
         {
             return _bookRepository.Get(id);
         }
+
+        public void Add(Book book)
+        {
+            _bookRepository.Add(book);
+        }
     }
 }
