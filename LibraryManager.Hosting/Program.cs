@@ -62,7 +62,7 @@ app.MapGet("/books/{type:regex(^[a-zA-Z]+$)}", bookController.GetBooksByType)
     .WithName("GetBooksByType")
     .WithOpenApi();
 
-app.MapPost("/book/add", bookController.add)
+app.MapPost("/book/add", bookController.Add)
     .WithName("AddBook")
     .WithOpenApi();
 
@@ -71,6 +71,7 @@ app.MapPost("/book/add", bookController.add)
 // - les requêtes BDD sur les Book n'utilisent pas la jointure avec Author, renvoyant null sur les appels 
 // aux api /books et /books/{id}
 // - /books/type renvoie une liste vide même sur une requête censée renvoyer des résultats
+// - sur la page du swagger, le schéma Book est visible en plus de BookDto
 
 // console log swagger url
 Console.WriteLine($"Swagger UI: /swagger");

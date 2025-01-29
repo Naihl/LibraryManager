@@ -1,8 +1,5 @@
-
-using DataAccessLayer.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Services.Services;
-
 
 namespace LibraryManager.Hosting.Controllers
 {
@@ -17,28 +14,38 @@ namespace LibraryManager.Hosting.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Book> GetAllBooks()
+        public IEnumerable<BookDto> GetAllBooks()
         {
-            var books = catalogManager.GetCatalog().ToList();
+            var books = catalogManager.GetCatalog().Select(book => new BookDto(book)).ToList();
             return books;
         }
 
         [HttpGet("{id}")]
-        public Book GetBookById(int id)
+        public BookDto GetBookById(int id)
         {
-            return catalogManager.Find(id);
+            var book = catalogManager.Find(id);
+            return new BookDto(book);
         }
 
         [HttpPost("{type}")]
-        public List<Book> GetBooksByType(TypeBook type)
+        public List<BookDto> GetBooksByType(TypeBook type)
         {
-            return catalogManager.GetCatalog(type).ToList();
+            var books = catalogManager.GetCatalog(type).Select(book => new BookDto(book)).ToList();
+            return books;
         }
 
         [HttpPost]
-        public void add(Book book)
+        public void Add(BookDto book)
         {
-            catalogManager.Add(book);
+            catalogManager.Add(new Book
+            {
+                Id = book.Id,
+                Name = book.Name,
+                Pages = book.Pages,
+                Author = book.Author,
+                Libraries = book.Libraries,
+                Type = book.Type
+            });
         }
     }
 }
