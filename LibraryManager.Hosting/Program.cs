@@ -51,19 +51,29 @@ IEnumerable<Book> aventureBooks = catalogManager.GetCatalog(TypeBook.Aventure);
 BookController bookController = new BookController(catalogManager);
 
 app.MapGet("/books", bookController.GetAllBooks)
-.WithName("GetAllBooks")
-.WithOpenApi();
-app.MapGet("/books/{id}", bookController.GetBookById)
-.WithName("GetBook")
-.WithOpenApi();
-app.MapGet("/books/{type}", bookController.GetBooksByType)
-.WithName("GetBooksByType")
-.WithOpenApi();
+    .WithName("GetAllBooks")
+    .WithOpenApi();
+app.MapGet("/books/{id:int}", bookController.GetBookById)
+    .WithName("GetBook")
+    .WithOpenApi();
+
+// hack pour se conformer au sujet (i.e. ne pas faire de /books/type/{type})
+app.MapGet("/books/{type:regex(^[a-zA-Z]+$)}", bookController.GetBooksByType)
+    .WithName("GetBooksByType")
+    .WithOpenApi();
+
 app.MapPost("/book/add", bookController.add)
-.WithName("AddBook")
-.WithOpenApi();
+    .WithName("AddBook")
+    .WithOpenApi();
 
 
-// TODO - L'enum est bugguée
+// Erreur connues :
+// - les requêtes BDD sur les Book n'utilisent pas la jointure avec Author, renvoyant null sur les appels 
+// aux api /books et /books/{id}
+// - /books/type renvoie une liste vide même sur une requête censée renvoyer des résultats
+
+// console log swagger url
+Console.WriteLine($"Swagger UI: /swagger");
+
 
 app.Run();
